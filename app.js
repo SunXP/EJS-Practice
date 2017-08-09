@@ -1,14 +1,17 @@
 var express = require("express");
-
 var app = express();
 
+app.use(express.static("public")); //express looks at public folder
+
+app.set("view engine", "ejs");  //no need to write extensions for route files
+
 app.get("/", function(req, res){
-    res.render("home.ejs");
+    res.render("home");
 });
 
 app.get("/fallinlovewith/:thing", function(req, res){
     var thing = req.params.thing;
-    res.render("love.ejs", {thingVar: thing});
+    res.render("love", {thingVar: thing});
     
 });
 
@@ -18,7 +21,7 @@ app.get("/posts", function(req, res){
         {title: "Poop", author: "Dave"},
         {title: "Woo", author: "Don"}
         ];
-    res.render("posts.ejs", {posts: posts});
+    res.render("posts", {posts: posts});
     
 });
 
